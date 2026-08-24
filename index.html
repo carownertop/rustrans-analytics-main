@@ -151,11 +151,13 @@
     .dock {
       display:flex;
       justify-content:center;
-      gap:48px;
+      flex-wrap:wrap;
+      gap:32px 22px;
       margin-top:56px;
       padding-top:28px;
       border-top:1px solid rgba(60,60,67,.12);
     }
+    .dock .app { width:88px; flex:0 0 auto; }
     .dock .icon { width:64px; height:64px; }
     .dock .name { font-size:12px; font-weight:400; color:var(--sub); }
     @media (max-width:700px) {
@@ -241,7 +243,7 @@
       </a>
     </nav>
 
-    <nav class="dock" aria-label="Сайт и CRM">
+    <nav class="dock" aria-label="Сайт, почта и ИИ">
       <a class="app" href="https://rustrans-logistic.ru/" target="_blank" rel="noopener">
         <span class="icon" aria-hidden="true">
           <img src="rtl-site-2.png" alt="" />
@@ -253,6 +255,30 @@
           <img src="bitrix24.png" alt="" />
         </span>
         <span class="name">Bitrix24</span>
+      </a>
+      <a class="app" href="https://mail.yandex.ru/" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <img src="yandex-mail.png" alt="" />
+        </span>
+        <span class="name">Почта</span>
+      </a>
+      <a class="app" href="https://telemost.yandex.ru/" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <img src="telemost.png" alt="" />
+        </span>
+        <span class="name">Телемост</span>
+      </a>
+      <a class="app" href="https://chatgpt.com/" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <img src="chatgpt.png" alt="" />
+        </span>
+        <span class="name">ChatGPT</span>
+      </a>
+      <a class="app" href="https://claude.ai/" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <img src="claude.png" alt="" />
+        </span>
+        <span class="name">Claude</span>
       </a>
     </nav>
   </div>
