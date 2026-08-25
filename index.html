@@ -33,7 +33,7 @@
       background-size:cover;
     }
     body { padding:40px 20px 64px; }
-    .stage { width:min(860px, 100%); margin:0 auto; }
+    .stage { width:min(920px, 100%); margin:0 auto; }
     .top {
       display:flex;
       align-items:stretch;
@@ -119,7 +119,7 @@
     .status.off { color:#ff9f0a; }
     nav.apps {
       display:grid;
-      grid-template-columns:repeat(4, 1fr);
+      grid-template-columns:repeat(5, 1fr);
       gap:22px 10px;
       justify-items:center;
     }
@@ -174,8 +174,9 @@
       .clock-plate { text-align:left; min-width:0; }
       .time { font-size:36px; }
       .logo-plate img { height:52px; }
-      nav.apps { grid-template-columns:repeat(2, 1fr); gap:28px 16px; }
-      .icon { width:84px; height:84px; }
+      nav.apps { grid-template-columns:repeat(5, 1fr); gap:18px 6px; }
+      nav.apps .icon { width:62px; height:62px; }
+      nav.apps .name { font-size:12px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .icon { transition:none; }
@@ -249,6 +250,21 @@
           </svg>
         </span>
         <span class="name">Склад</span>
+      </a>
+      <a class="app" href="https://carownertop.github.io/rustrans-analytics-view/automatic/">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 100 100">
+            <defs><linearGradient id="g-rep" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bf5af2"/><stop offset="1" stop-color="#7d2db8"/></linearGradient></defs>
+            <rect width="100" height="100" fill="url(#g-rep)"/>
+            <rect x="36" y="20" width="40" height="52" rx="8" fill="#fff" opacity=".4"/>
+            <rect x="24" y="28" width="40" height="52" rx="8" fill="#fff"/>
+            <rect x="32" y="40" width="24" height="5" rx="2.5" fill="#7d2db8"/>
+            <rect x="32" y="50" width="24" height="5" rx="2.5" fill="#7d2db8"/>
+            <rect x="32" y="60" width="14" height="5" rx="2.5" fill="#7d2db8"/>
+            <path fill="#fff" d="M76 18l2.1 6.2 6.4 2.1-6.4 2.1L76 34.6l-2.1-6.2-6.4-2.1 6.4-2.1Z"/>
+          </svg>
+        </span>
+        <span class="name">Отчёты</span>
       </a>
     </nav>
 
