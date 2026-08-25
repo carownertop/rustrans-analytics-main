@@ -94,6 +94,15 @@
       color:var(--text);
     }
     .fx.show { display:block; }
+    .fx-dir {
+      display:inline-block;
+      margin-left:5px;
+      font-size:11px;
+      line-height:1;
+      vertical-align:2px;
+    }
+    .fx-dir.up { color:#ff3b30; }
+    .fx-dir.down { color:#34c759; }
     .fx small {
       margin-left:6px;
       font-size:12px;
@@ -289,6 +298,7 @@
     const dateEl = document.getElementById("date");
     const fxEl = document.getElementById("fx");
     const statusEl = document.getElementById("status");
+    let lastIso = "";
 
     async function loadUsd() {
       const urls = [
@@ -303,15 +313,28 @@
           const usd = data && data.Valute && data.Valute.USD;
           if (!usd) continue;
           const rate = Number(usd.Value) / Number(usd.Nominal || 1);
+          const prev = Number(usd.Previous) / Number(usd.Nominal || 1);
           if (!Number.isFinite(rate)) continue;
           const pretty = rate.toLocaleString("ru-RU", {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
           });
-          fxEl.replaceChildren(
-            document.createTextNode("$ " + pretty + " ₽"),
-            Object.assign(document.createElement("small"), { textContent: "ЦБ РФ" })
-          );
+          const nodes = [document.createTextNode("$ " + pretty + " ₽")];
+          if (Number.isFinite(prev)) {
+            const delta = rate - prev;
+            if (Math.abs(delta) >= 0.005) {
+              const dir = document.createElement("span");
+              dir.className = "fx-dir " + (delta > 0 ? "up" : "down");
+              dir.textContent = delta > 0 ? "▲" : "▼";
+              dir.title = (delta > 0 ? "+" : "") + delta.toLocaleString("ru-RU", {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+              }) + " ₽ к предыдущему курсу ЦБ";
+              nodes.push(dir);
+            }
+          }
+          nodes.push(Object.assign(document.createElement("small"), { textContent: "ЦБ РФ" }));
+          fxEl.replaceChildren(...nodes);
           fxEl.classList.add("show");
           return;
         } catch (e) {}
@@ -332,9 +355,12 @@
       const off = OFF.has(iso);
       statusEl.textContent = off ? "Выходной · МСК" : "Рабочий день · МСК";
       statusEl.classList.toggle("off", off);
+      if (iso !== lastIso) {
+        lastIso = iso;
+        loadUsd();
+      }
     }
     tick();
-    loadUsd();
     setInterval(tick, 1000);
   </script>
 </body>
